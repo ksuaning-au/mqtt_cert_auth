@@ -1,4 +1,10 @@
 # MQTT Mutual Authentication Examples
+Some hopefully helpful information on how to generate keys, configure Mosquitto and configure 
+clients with mutual certificate authentication.
+
+Includes a Python and Arduino example of MQTT clients with mutual certificate authentication 
+enabled.
+
 ## Generating Certificates
 We are going to self sign our certificates (we are the certificate authority).
 
