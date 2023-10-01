@@ -1,0 +1,4 @@
+pattern readwrite /hello/#
+
+user myclient
+topic /test/#
