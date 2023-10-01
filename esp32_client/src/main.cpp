@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <WiFi.h>
 #include <MQTT.h>
+#include <WiFi.h>
 #include <WiFiClientSecure.h>
 
 const char ssid[] = "YOURSSID";
@@ -23,7 +23,7 @@ MQTTClient client;
 
 unsigned long lastMillis = 0;
 
-void messageReceived(String &topic, String &payload) {
+void messageReceived(String& topic, String& payload) {
   /**
    * MQTT Client message recived callback.
    */
@@ -34,39 +34,39 @@ void setup() {
   Serial.begin(115200);
 
   // Connect to the WiFi
-   WiFi.begin(ssid, pass);
+  WiFi.begin(ssid, pass);
 
   Serial.print("Checking wifi...");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
     delay(1000);
   }
-	Serial.println("WiFi connected!");
+  Serial.println("WiFi connected!");
 
   // Configure WiFiClientSecure with the required certs
   net.setCACert(serverCA);
-	net.setCertificate(clientCert);
-	net.setPrivateKey(clientKey);
+  net.setCertificate(clientCert);
+  net.setPrivateKey(clientKey);
 
   // Set a timeout for our WiFiClient so it doesn't hang on disconnect
   net.setTimeout(5);
-  
+
   // Start the mqtt client
   client.begin("mqtt.mydomain.com", 8883, net);
-  
+
   // Set the mqtt client message callback
-	client.onMessage(messageReceived);
+  client.onMessage(messageReceived);
 
   // Connect to the mqtt broker
   while (!client.connect("myclient", "public", "public")) {
-		Serial.print(".");
-		delay(1000);
-	}
+    Serial.print(".");
+    delay(1000);
+  }
 
-	Serial.println("connected!");
+  Serial.println("connected!");
 
   // Subscribe to the relevant topics
-	client.subscribe("/test");
+  client.subscribe("/test");
 }
 
 void loop() {
@@ -78,7 +78,7 @@ void loop() {
     while (!client.connect("myclient", "public", "public")) {
       Serial.print(".");
       delay(1000);
-	  }
+    }
     Serial.println("Reconnected to MQTT Broker!");
   }
 
