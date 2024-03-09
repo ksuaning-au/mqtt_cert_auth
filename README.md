@@ -27,7 +27,7 @@ openssl req -new -out server.csr -key server.key
 ```
 4. Sign the server certificate as the CA.
 ```
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CA createserial -out server.crt -days 360
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 360
 ```
 5. Generate the client key and certificate signing request. Ensure the common name is something 
    unique to the client. This will be its username.
